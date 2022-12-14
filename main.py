@@ -1,7 +1,17 @@
-import pymssql  
+import pymssql
+  
 def connection():
-    conn = pymssql.connect(server='miservidorsqlbayteq.database.windows.net', user='paul.penafiel', password='Bayteq123.', database='BaseSegurosEjemplo')  
-    cursor = conn.cursor()  
-    cursor.execute('SELECT * FROM dbo.ContratoSeguroSalud;')  
-    row = cursor.fetchall()
-    return row 
+    cursor.execute('SELECT [numeroContrato],[titularContrato],[StatusContrato],[idPlan],[idAfiliado],[rowversion] FROM [dbo].[ContratoSeguroSalud] WHERE [StatusContrato] = \'En Curso\'')
+    consulta = cursor.fetchall()
+    return consulta
+
+def newvalue(titular, status):
+    cursor.execute('UPDATE [dbo].[ContratoSeguroSalud] SET [StatusContrato] = ' + status + ' WHERE [titularContrato] ='+ titular + 'and [StatusContrato] = \'En Curso\'' )
+    conn.commit()
+    print('Ejecutado')
+
+conn = pymssql.connect(server='miservidorsqlbayteq.database.windows.net', user='paul.penafiel', password='Bayteq123.', database='BaseSegurosEjemplo')  
+cursor = conn.cursor() 
+
+
+#newvalue('\'Paul Peñafiel\'','\'Denegado\'')
