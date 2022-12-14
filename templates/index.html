@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<HTML lang="en">
+   <HEAD>
+    <meta charset="UTF-8">
+      <TITLE>Cobro Seguro</TITLE>
+   </HEAD>
+   <BODY>
+      
+      <form method="post" action="/enviar">
+        <ul>
+         No Contrato, Nombre, Id Plan, Status
+            {% for i in data.cliente  %}
+            <li>{% for j in i %}
+            {{ j }} 
+            {% endfor %} <!-- The second value will be selected initially -->
+            <select name="{{i[0]}}">
+              <option value="En Curso" selected> En Curso</option>
+              <option value="Aprobado">Aprobado</option>
+              <option value="Denegado">Denegado</option>
+            </select>
+            </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Aceptar</button>
+      </form>
+   </BODY>
+</HTML>
